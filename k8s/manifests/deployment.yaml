@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workwave
+  labels:
+    app: workwave
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workwave
+  template:
+    metadata:
+      labels:
+        app: workwave
+
+    spec:
+      containers:
+        - name: workwave
+          image: uthutu/workwave
+          ports:
+            - containerPort: 80

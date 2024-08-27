@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workwave #<-- Deployment name
+  labels:
+    app: workwave
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workwave #<-- Deployment manages all replicas on the cluster with this label name
+  template: #<-- Pod template
+    metadata:
+      labels:
+        app: workwave #<-- matches the label selector
+
+    spec:
+      containers:
+        - name: workwave
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: 80
